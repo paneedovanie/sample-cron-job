@@ -1,7 +1,4 @@
 {
-  "functions": {
-    "api/monthly-jobs.py": {}
-  },
   "crons": [
     {
       "path": "/api/monthly-jobs",
