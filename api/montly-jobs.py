@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler
+
 import pyppeteer
 from pyppeteer import launch
 import asyncio
@@ -14,9 +15,10 @@ async def scraper():
 class handler(BaseHTTPRequestHandler):
  
     def do_GET(self):
-        asyncio.get_event_loop().run_until_complete(scraper())
+        loop = asyncio.get_event_loop()
+        content = loop.run_until_complete(scraper())
         self.send_response(200)
         self.send_header('Content-type','text/plain')
         self.end_headers()
-        self.wfile.write('Hello, world!'.encode('utf-8'))
+        self.wfile.write(f'Hello, world!{content}'.encode('utf-8'))
         return
