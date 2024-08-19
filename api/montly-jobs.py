@@ -1,7 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-
+from webdriver_manager.chrome import ChromeDriverManager
 
 def run_scraper():
     # Path to your custom Chromium binary
@@ -9,13 +10,16 @@ def run_scraper():
 
     # Set up Chrome options
     chrome_options = Options()
-    chrome_options.binary_location = CHROMIUM_PATH
+    # chrome_options.binary_location = CHROMIUM_PATH
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--headless')  # Optional: Run in headless mode
 
+    # Set up WebDriver service using ChromeDriverManager
+    service = Service(ChromeDriverManager().install())
+
     # Initialize WebDriver
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # Example usage
     driver.get('https://example.com')
