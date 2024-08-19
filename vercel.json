@@ -4,5 +4,10 @@
       "path": "/api/monthly-jobs",
       "schedule": "0 1 * * *"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "PIP_INSTALL_FLAGS": "--no-cache-dir"
+    }
+  }
 }
